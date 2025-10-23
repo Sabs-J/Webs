@@ -1,0 +1,175 @@
+/*
+	style.css - project stylesheet
+	- Global variables (design tokens) at the top let you change theme/typography in one place
+	- Utilities for quick edits in HTML
+	- Section-scoped tokens for header/main/footer so you can change each section from one block
+*/
+
+/* Reset / base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+/* Design tokens and section-scoped tokens
+	 Edit the values here to change the look globally or per-section. */
+:root {
+	/* Global colors */
+	--color-bg: #7299c0;
+	--color-text: #232b52;
+	--color-accent: #152433;
+
+	/* Global typography */
+	--font-base: 'Arial', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+	--font-heading: 'Georgia', 'Times New Roman', serif;
+
+	/* Typographic scale */
+	--fs-xs: 12px;
+	--fs-sm: 14px;
+	--fs-md: 16px;
+	--fs-lg: 20px;
+	--fs-xl: 28px;
+
+	/* Header (section tokens) */
+	--header-bg: #0f1724;
+	--header-text: #ffffff;
+	--header-accent: #0b74de;
+	--header-font: var(--font-heading);
+	--header-padding: 12px 24px;
+
+	/* Main (section tokens) */
+	--main-bg: transparent;
+	--main-text: var(--color-text);
+	--main-padding: 24px 0;
+
+	/* Footer (section tokens) */
+	--footer-bg: #e6eef8;
+	--footer-text: #0b2545;
+	--footer-padding: 12px 24px;
+}
+
+/* Base styles */
+body {
+	font-family: var(--font-base);
+	line-height: 1.4;
+	padding: 24px;
+	background: var(--color-bg);
+	color: var(--color-text);
+}
+
+/* Page container / hero */
+.hero {
+	max-width: 720px;
+	margin: 40px auto;
+	background: #fff;
+	padding: 24px;
+	border-radius: 8px;
+	box-shadow: 0 6px 18px rgba(17,17,17,0.06);
+}
+.hero h1 { font-size: var(--fs-xl); margin-bottom: 8px; }
+.hero p { color: #444; }
+
+/* Visibility helper */
+.hidden { display: none !important; }
+
+/* Utilities */
+.text-accent { color: var(--color-accent); }
+.text-muted { color: #6b7280; }
+
+.fs-xs { font-size: var(--fs-xs); }
+.fs-sm { font-size: var(--fs-sm); }
+.fs-md { font-size: var(--fs-md); }
+.fs-lg { font-size: var(--fs-lg); }
+.fs-xl { font-size: var(--fs-xl); }
+
+.font-heading { font-family: var(--font-heading); }
+
+/* Reusable components */
+.main-nav { display: flex; gap: 16px; align-items: center; }
+
+/* Section rules that read from the section tokens above
+	 Change the --header-... / --main-... / --footer-... variables to update appearance */
+header {
+	background: var(--header-bg);
+	color: var(--header-text);
+	padding: var(--header-padding);
+	font-family: var(--header-font);
+}
+
+main {
+	background: var(--main-bg);
+	color: var(--main-text);
+	padding: var(--main-padding);
+}
+
+footer {
+	background: var(--footer-bg);
+	color: var(--footer-text);
+	padding: var(--footer-padding);
+	margin-top: 24px;
+}
+
+/* Small example: style a link in the header to use the header accent */
+header a { color: var(--header-accent); text-decoration: none; }
+
+/* Notes:
+	 - Use :root variables for theme-wide changes.
+	 - Use the section tokens (prefixed with header/main/footer) to change sections in one place.
+	 - Utilities (.fs-*, .text-*) are helpful for quick overrides in HTML.
+*/
+
+/* Panels: Reminders and Games */
+.panel { max-width: 900px; margin: 30px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.panel h2 { margin-bottom: 12px; }
+
+/* Reminders list */
+#reminders-list { margin-top: 12px; }
+.reminder-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #eee; }
+
+/* Game area */
+.game-area { display: flex; gap: 16px; align-items: flex-start; }
+canvas#tetris { background: #081421; border-radius: 6px; box-shadow: inset 0 0 8px rgba(0,0,0,0.4); }
+.game-controls { display: flex; flex-direction: column; gap: 8px; }
+
+/* Game tabs */
+.game-tabs { display:flex; gap:8px; margin-bottom:12px; }
+.game-tabs .tab { padding:6px 10px; border-radius:6px; background:#f0f4f8; cursor:pointer; }
+.game-tabs .tab.active { background: var(--color-accent); color: #fff; }
+
+/* Sudoku board */
+.sudoku-board { display: grid; grid-template-columns: repeat(9, 40px); gap:2px; }
+.sudoku-board input { width: 38px; height: 38px; text-align: center; font-size: 18px; border: 1px solid #bbb; }
+.sudoku-board .cell { width: 38px; height:38px; display:flex; align-items:center; justify-content:center; }
+
+/* Thick lines for 3x3 blocks */
+.sudoku-board input:nth-child(3n) { border-right: 2px solid #333; }
+.sudoku-board input:nth-child(n+19):nth-child(-n+27),
+.sudoku-board input:nth-child(n+46):nth-child(-n+54) { border-bottom: 2px solid #333; }
+
+.sudoku-board input[readonly] { background: #f3f4f6; font-weight: bold; }
+
+/* Math area */
+.math-problem { font-size: 20px; margin-bottom: 8px; }
+.math-problem, #math-answer { display:block; margin-bottom:8px; }
+
+/* Mobile responsive tweaks */
+@media (max-width: 700px){
+	.panel { margin: 12px; padding: 12px; }
+	.game-area { flex-direction: column; align-items: center; }
+	canvas#tetris { width: 160px; height: 320px; }
+	.tetris-mobile-controls { display:flex; gap:8px; margin-top:8px; }
+	.tetris-mobile-controls .ctrl { padding: 12px 14px; font-size: 18px; border-radius:8px; }
+	.sudoku-board { grid-template-columns: repeat(9, 32px); gap:2px; }
+	.sudoku-board input { width:30px; height:30px; font-size:16px; }
+}
+
+
+
+
+/* Image helpers */
+.img-fluid { max-width: 100%; height: auto; display: block; }
+.demo-figure { max-width: 900px; margin: 24px auto; text-align: center; }
+
+/* Draggable cursor hint */
+.site-logo { position: fixed; right: 16px; left: auto; top: 16px; width: 80px; height: auto; z-index: 1000; }
+.site-logo img { width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+
+

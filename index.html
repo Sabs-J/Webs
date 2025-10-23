@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="site-header">
+        <nav class="main-nav">
+            <h1>ALAGA-Watch Application</h1>
+            <div>
+                <a href="#site-main">Home</a> |
+                <a href="#reminders">Reminders</a> |
+                <a href="#games">Games</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="site-main">
+        <section class="hero">
+            <h1>Welcome to my website, ALAGA!</h1>
+            <p>If you can see this text, then Sabat lowkey cooked.</p>
+        </section>
+        <!-- Site logo placed to the side -->
+        <div class="site-logo">
+            <img src="https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.15752-9/541590199_1145965260925852_1712935435653628199_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=9f807c&_nc_ohc=CAhHbvDeSG8Q7kNvwFceQoO&_nc_oc=AdmcUo2fMu-jqNmiRFQTXQTDmXA6h8exuFzfRRrpOY0J8HtPstbvoQgCdGjb5EqwZqbFzvNgx2g-T4ED0AI8ZVUA&_nc_zt=23&_nc_ht=scontent.fmnl4-1.fna&oh=03_Q7cD3gH0PsrXhl6MmEpg50WaypW1_e1ON4kVE5wMAZ4Nl-hrQw&oe=69217A93" alt="Site logo" id="site-logo-img" class="img-fluid" />
+        </div>
+    </main>
+
+    <footer id="site-footer">
+        <p>We, students from Grade 9 - Homer, made this website.</p>
+        <p>Because we're learning and having fun!</p>
+    </footer>
+
+    <!-- Reminders section (alarm-style) -->
+    <section id="reminders" class="panel">
+        <h2>Reminders (Alarms)</h2>
+        <div class="alarm-form">
+            <label>Label: <input type="text" id="reminder-label" placeholder="Wake up" /></label>
+            <div class="time-row">
+                <label>Sec: <input type="number" id="reminder-sec" min="0" max="59" value="0"></label>
+                <label>Min: <input type="number" id="reminder-min" min="0" max="59" value="0"></label>
+                <label>Hour: <input type="number" id="reminder-hour" min="0" max="23" value="0"></label>
+                <label>Day (+days): <input type="number" id="reminder-day" min="0" value="0"></label>
+            </div>
+            <label>Repeat: <input type="checkbox" id="reminder-repeat"></label>
+            <div class="alarm-actions">
+                <button id="add-alarm">Add Alarm</button>
+            </div>
+        </div>
+        <div id="reminders-list"></div>
+    </section>
+
+    <!-- Games section -->
+    <section id="games" class="panel">
+        <h2>Games</h2>
+        <div class="game-tabs">
+            <button class="tab active" data-tab="tetris-tab">Tetris</button>
+            <button class="tab" data-tab="sudoku-tab">Sudoku</button>
+        </div>
+        <div class="game-tab-panels">
+            <div id="tetris-tab" class="tab-panel">
+                <p>Simple Tetris-like game. Controls: ← → to move, ↓ to speed drop, ↑ to rotate, Space to hard drop, P to pause.</p>
+                <div class="game-area">
+                    <canvas id="tetris" width="200" height="400"></canvas>
+                    <div class="game-controls">
+                        <button id="start-game">Start</button>
+                        <button id="pause-game">Pause</button>
+                            <button id="stop-game">Stop</button>
+                            <!-- Mobile controls (visible on small screens) -->
+                            <div class="tetris-mobile-controls" aria-hidden="false">
+                                <button id="t-left" class="ctrl">◀</button>
+                                <button id="t-rotate" class="ctrl">⟳</button>
+                                <button id="t-right" class="ctrl">▶</button>
+                                <button id="t-down" class="ctrl">↓</button>
+                                <button id="t-drop" class="ctrl">⤓</button>
+                            </div>
+                        <div>Score: <span id="score">0</span></div>
+                    </div>
+                </div>
+            </div>
+            <div id="sudoku-tab" class="tab-panel" style="display:none;">
+                <p>Fill the 9x9 Sudoku. Click a cell and type 1-9. Use 'New' to load a puzzle and 'Check' to validate.</p>
+                <div class="sudoku-controls">
+                    <button id="sudoku-new">New</button>
+                    <button id="sudoku-check">Check</button>
+                    <button id="sudoku-solve">Solve</button>
+                    <button id="sudoku-reset">Reset</button>
+                    <button id="sudoku-stop">Stop</button>
+                </div>
+                <div id="sudoku-board" class="sudoku-board"></div>
+            </div>
+            
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
